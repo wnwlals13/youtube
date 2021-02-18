@@ -1,0 +1,57 @@
+:root {
+  --nav-width: 100vw;
+  --nav-height: 4rem;
+  --nav-color: black;
+  --nav-font-color: white;
+  --font-size: 30px;
+  --input-width: 200px;
+  --logo-width: 40px;
+}
+
+header {
+  width: var(--nav-width);
+  height: var(--nav-height);
+  background: var(--nav-color);
+  color: var(--nav-font-color);
+  font-size: var(--font-size);
+  display: flex;
+  /* justify-content: space-between; */
+  align-content: center;
+  padding: 0.4em 1em;
+  position: fixed;
+  z-index: 2;
+}
+.navbar {
+  display: flex;
+  align-items: center;
+  margin-right: 1em;
+}
+
+.nav_logo {
+  margin-right: 0.5rem;
+}
+
+.inputText {
+  flex-basis: 100%;
+  font-size: 1.2rem;
+  border: 0;
+  outline: 0;
+  padding-left: 10px;
+}
+
+.inputBtn {
+  outline: 0;
+  border: 0;
+  background: darkgray;
+  cursor: pointer;
+}
+
+.inputBtn_img {
+  height: 100%;
+  padding: 0.5rem 0.2rem;
+  transition: transform 200ms ease-in;
+}
+
+.inputBtn_img:hover {
+  transform: scale(1.1);
+}

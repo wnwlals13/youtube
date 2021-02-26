@@ -1,19 +1,21 @@
-import React, { createRef, useCallback } from "react";
-import Video from "../video_item/video";
+import React from "react";
+import VideoItem from "../video_item/video";
 import styles from "./video_list.module.css";
 
-const VideoList = ({ videos, onVideoClick, display }) => {
+const VideoList = ({ youtubes, onVideoClick, display }) => {
   return (
-    <ul className={styles.videos}>
-      {videos.map((video) => (
-        <Video
-          key={video.id}
-          video={video}
-          onVideoClick={onVideoClick}
-          display={display}
-        />
-      ))}
-    </ul>
+    <>
+      <div className={styles.videos}>
+        {youtubes.map((youtube) => (
+          <VideoItem
+            key={youtube.id}
+            youtube={youtube}
+            onVideoClick={onVideoClick}
+            display={display}
+          />
+        ))}
+      </div>
+    </>
   );
 };
 

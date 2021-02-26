@@ -1,5 +1,6 @@
 .content {
   display: flex;
+  margin-top: 80px;
 }
 
 .detail {
@@ -9,20 +10,14 @@
 .list {
   flex: 1 1 30%;
 }
-
-@media (min-width: 768px) {
-  .content {
-    padding: 0 5rem;
-  }
-}
-
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   .content {
     display: flex;
     flex-direction: column;
   }
 
   .detail {
-    margin: 0 2rem;
+    margin-left: 0.5em;
+    margin-right: 1em;
   }
 }

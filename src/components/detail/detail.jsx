@@ -1,27 +1,25 @@
 import React from "react";
-import Navbar from "../navbar/navbar";
 import styles from "./detail.module.css";
 
-const Detail = ({ video }) => {
+const Detail = ({ video, video: { snippet } }) => {
   return (
     <section className={styles.detail}>
       <iframe
-        type="text/html"
+        title="youtube video player"
         width="100%"
-        height="500"
-        frameBorder="0"
-        allowFullScreen
+        className={styles.ytplayer}
+        id="ytplayer"
         src={`https://www.youtube.com/embed/${video.id}`}
-      />
+      ></iframe>
+
+      <h1 className={styles.title}>{snippet.title}</h1>
+      <h3 className={styles.channelId}>{snippet.channelTitle}</h3>
       <br />
+      <hr />
       <br />
-      <h2>{video.snippet.title}</h2>
-      <br />
-      <hr></hr>
-      <br />
-      <h3>{video.snippet.cannelTitle}</h3>
-      <div>{video.snippet.description}</div>
+      <pre className={styles.description}>{snippet.description}</pre>
     </section>
   );
 };
+
 export default Detail;

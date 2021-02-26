@@ -1,55 +1,40 @@
-import React, { useRef } from "react";
+import React, { memo, useRef } from "react";
 import styles from "./navbar.module.css";
 
-const Navbar = ({ onSearch }) => {
-  const searchRef = React.createRef();
-  const handleSearch = () => {
-    // e.preventDefault();
-    const search = searchRef.current.value;
-    search && onSearch(search);
-  };
+const Navbar = memo(({ onSearch }) => {
+  const searchRef = useRef();
 
+  const handleSearch = () => {
+    const input = searchRef.current.value;
+    input && onSearch(input);
+  };
   const onClick = () => {
     handleSearch();
   };
-
   const onKeyPress = (event) => {
     if (event.key === "Enter") {
       handleSearch();
     }
   };
-
-  const goMain = () => {
-    console.log("sdsd");
-  };
-
   return (
     <header>
-      <nav className={styles.navbar} onClick={goMain}>
-        <img
-          src="/images/logo.png"
-          alt="youtube_logo"
-          className={styles.nav_logo}
-        />
-        <a className={styles.nav_title}>Youtube</a>
-      </nav>
-
+      <a href="/" className={styles.nav_logo}>
+        <img src="../images/logo.png" alt="logo" />
+      </a>
+      <div className={styles.navbar}>Youtuba</div>
       <input
         ref={searchRef}
         type="text"
         className={styles.inputText}
+        placeholder="Youtuba 검색"
         onKeyPress={onKeyPress}
-        placeholder="Search.."
-      />
-      <button type="submit" className={styles.inputBtn} onClick={onClick}>
-        <img
-          className={styles.inputBtn_img}
-          src="/images/search.png"
-          alt="search"
-        />
+      ></input>
+      <button onClick={onClick} className={styles.inputBtn}>
+        <img src="../images/search.png" alt="search" />
       </button>
+      <img src="../images/user.png" alt="user" className={styles.user} />
     </header>
   );
-};
+});
 
 export default Navbar;

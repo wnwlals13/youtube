@@ -1,56 +1,48 @@
 import React, { useCallback, useEffect, useState } from "react";
-import styles from "./app.module.css";
-import VideoList from "./components/video_list/video_list";
-import Navbar from "./components/navbar/navbar";
 import Detail from "./components/detail/detail";
+import Navbar from "./components/navbar/navbar";
+import VideoList from "./components/video_list/video_list";
+import styles from "./app.module.css";
 
-function App({ youtube }) {
-  const [videos, setVideos] = useState([]);
-  const [detail, setDetail] = useState(null);
-  const [channel, setChannel] = useState(null);
+const App = ({ videos }) => {
+  const [youtubes, setYoutubes] = useState([]);
+  const [selectedVideo, setSelectedVideo] = useState(null);
 
-  const handleSearch = (query) => {
-    youtube //
+  const selectVideo = useCallback((video) => {
+    setSelectedVideo(video);
+  });
+  const search = useCallback((query) => {
+    setSelectedVideo(null); //✨ 재검색시 목록을 나가기
+    videos //
       .search(query)
-      .then((videos) => {
-        setVideos(videos);
-        setDetail(null);
-      });
-  };
-
-  const handleDetail = (video) => {
-    setDetail(video);
-    console.log(video);
-  };
-
-  useEffect(() => {
-    youtube //
-      .mostPopular()
-      .then((videos) => {
-        setVideos(videos);
+      .then((youtubes) => {
+        setYoutubes(youtubes);
       });
   }, []);
-
+  useEffect(() => {
+    videos
+      .mostPopular() //
+      .then((youtubes) => setYoutubes(youtubes));
+  }, [videos]);
   return (
-    <div className={styles.app}>
-      <Navbar onSearch={handleSearch} />
+    <>
+      <Navbar onSearch={search} />
       <section className={styles.content}>
-        {detail && (
+        {selectedVideo && (
           <div className={styles.detail}>
-            <Detail video={detail} />
+            <Detail video={selectedVideo} />
           </div>
         )}
         <div className={styles.list}>
           <VideoList
-            videos={videos}
-            channel={channel}
-            onVideoClick={handleDetail}
-            display={detail ? "list" : "grid"}
+            youtubes={youtubes}
+            onVideoClick={selectVideo}
+            display={selectedVideo ? "list" : "grid"}
           />
         </div>
       </section>
-    </div>
+    </>
   );
-}
+};
 
 export default App;
